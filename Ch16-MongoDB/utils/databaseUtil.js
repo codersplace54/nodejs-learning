@@ -2,7 +2,7 @@ const mongo = require('mongodb');
 
 const MongoClient = mongo.MongoClient;
 
-const MONGO_URL = "mongodb+srv://root:root@learnnodejs.c5ng8ha.mongodb.net/?retryWrites=true&w=majority&appName=LearnNodeJs";
+const MONGO_URL = "mongodb+srv://root:root@completecoding.u1asz.mongodb.net/?retryWrites=true&w=majority&appName=CompleteCoding";
 
 let _db;
 
@@ -16,8 +16,8 @@ const mongoConnect = (callback) => {
   });
 }
 
-const getDB = ()=> {
-  if(!_db) {
+const getDB = () => {
+  if (!_db) {
     throw new Error('Mongo not connected');
   }
   return _db;

@@ -16,7 +16,7 @@ module.exports = class Home {
   }
 
   save() {
-    Home.fetchAll((registeredHomes) => {
+    Home.find((registeredHomes) => {
       if (this.id) { // edit home case
         registeredHomes = registeredHomes.map(home => 
           home.id === this.id ? this : home);
@@ -31,21 +31,21 @@ module.exports = class Home {
     });
   }
 
-  static fetchAll(callback) {
+  static find(callback) {
     fs.readFile(homeDataPath, (err, data) => {
       callback(!err ? JSON.parse(data) : []);
     });
   }
 
   static findById(homeId, callback) {
-    this.fetchAll(homes => {
+    this.find(homes => {
       const homeFound = homes.find(home => home.id === homeId);
       callback(homeFound);
     })
   }
 
   static deleteById(homeId, callback) {
-    this.fetchAll(homes => {
+    this.find(homes => {
       homes = homes.filter(home => home.id !== homeId);
       fs.writeFile(homeDataPath, JSON.stringify(homes), error => {
         Favourite.deleteById(homeId, callback);
